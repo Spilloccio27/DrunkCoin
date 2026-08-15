@@ -1,0 +1,29 @@
+/* ==========================================================================
+   DRUNK MODE — the toggle in the nav puts `is-drunk` on <body>
+   Everything the mode changes lives here, so it can be tuned (or deleted)
+   in one place. State is remembered across pages by js/site.js.
+   Depends on: tokens.css
+   ========================================================================== */
+
+body.is-drunk .site-main {
+  animation: drunk-sway 7s ease-in-out infinite;
+}
+
+body.is-drunk .orb {
+  opacity: .7;
+  filter: blur(70px) saturate(1.3);
+}
+
+body.is-drunk .floaty {
+  animation-duration: 3.4s;
+}
+
+body.is-drunk .neon-sign {
+  animation-duration: 1.6s;
+}
+
+@keyframes drunk-sway {
+  0%, 100% { transform: rotate(0deg)    translateX(0); }
+  25%      { transform: rotate(.45deg)  translateX(7px); }
+  75%      { transform: rotate(-.45deg) translateX(-7px); }
+}

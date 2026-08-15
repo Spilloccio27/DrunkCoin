@@ -1,0 +1,355 @@
+/* ==========================================================================
+   GALLERY — the Meme Vault grid, filter chips, lightbox and media kit.
+   Loaded by gallery.html only. Depends on: tokens.css, components.css
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. Filter chips
+   ========================================================================== */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-bottom: var(--space-7);
+}
+
+.filter {
+  padding: 10px var(--space-5);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-pill);
+  background: var(--c-surface);
+  color: var(--c-muted);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--dur-fast);
+}
+
+.filter:hover {
+  border-color: var(--c-cyan);
+  color: var(--c-cyan);
+}
+
+.filter.is-active {
+  border-color: transparent;
+  background: linear-gradient(180deg, var(--c-gold-soft), var(--c-gold));
+  color: var(--c-ink-invert);
+  box-shadow: var(--shadow-gold);
+}
+
+.filter__count {
+  opacity: .6;
+  font-size: .9em;
+}
+
+
+/* ==========================================================================
+   2. Grid
+   Square art fills one cell, 16:9 art spans two. Aspect ratio is declared in
+   CSS rather than measured, so nothing reflows while the images stream in.
+   ========================================================================== */
+.meme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.meme {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--dur-base) var(--ease-out),
+              border-color var(--dur-base),
+              box-shadow var(--dur-base);
+}
+
+.meme:hover,
+.meme:focus-visible {
+  transform: translateY(-6px) rotate(-.6deg);
+  border-color: var(--c-line-accent);
+  box-shadow: var(--shadow-card), var(--glow-gold);
+}
+
+.meme--wide { grid-column: span 2; }
+
+.meme__frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--c-bg-raised);
+}
+
+/* Two columns plus the gap between them, at exactly one column's height, so a
+   banner sits flush with the square tiles beside it instead of pushing its
+   whole row taller. The ratio holds at both the 3- and 2-column layouts. */
+.meme--wide .meme__frame { aspect-ratio: 2.06 / 1; }
+
+.meme__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.meme:hover .meme__img { transform: scale(1.05); }
+
+/* Caption bar, always readable over the art */
+.meme__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--c-line);
+}
+
+.meme__title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: .84rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+}
+
+.meme__hint {
+  flex: 0 0 auto;
+  font-size: var(--text-xs);
+  color: var(--c-cyan);
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+}
+
+.meme:hover .meme__hint,
+.meme:focus-visible .meme__hint { opacity: 1; }
+
+/* "no results" line — only shown when a filter empties the grid */
+.meme-empty {
+  padding: var(--space-9) 0;
+  font-family: var(--font-marker);
+  font-size: 1.3rem;
+  text-align: center;
+  color: var(--c-muted);
+}
+
+
+/* ==========================================================================
+   3. Lightbox
+   ========================================================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  background: var(--c-overlay);
+  backdrop-filter: blur(16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base);
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: min(1000px, 100%);
+  max-height: 100%;
+  transform: scale(.97);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.lightbox.is-open .lightbox__panel { transform: none; }
+
+.lightbox__stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  flex: 1;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 68vh;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.lightbox__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+}
+
+.lightbox__title {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.08rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+
+.lightbox__caption {
+  flex: 1 1 320px;
+  min-width: 0;
+  font-size: var(--text-sm);
+  color: var(--c-muted);
+}
+
+.lightbox__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+/* Chrome: close and prev/next */
+.lightbox__close,
+.lightbox__nav {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-pill);
+  background: var(--c-surface-hi);
+  color: var(--c-ink);
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: var(--dur-fast);
+}
+
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  border-color: var(--c-cyan);
+  color: var(--c-cyan);
+}
+
+.lightbox__close { top: var(--space-5); right: var(--space-5); }
+.lightbox__nav--prev { top: 50%; left:  var(--space-5); transform: translateY(-50%); }
+.lightbox__nav--next { top: 50%; right: var(--space-5); transform: translateY(-50%); }
+
+.lightbox__counter {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: .68rem;
+  letter-spacing: .1em;
+  color: var(--c-muted);
+}
+
+
+/* ==========================================================================
+   4. Media kit
+   ========================================================================== */
+.kit {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--space-7);
+  align-items: center;
+  padding: var(--space-7);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-xl);
+  background: var(--c-surface);
+}
+
+.kit__logo {
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: var(--glow-gold-lg);
+}
+
+.kit__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.kit__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.swatch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--c-muted);
+}
+
+.swatch::before {
+  content: "";
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: var(--swatch);
+}
+
+
+/* ==========================================================================
+   5. Responsive
+   ========================================================================== */
+@media (max-width: 1000px) {
+  .meme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .kit {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .kit__logo    { max-width: 220px; }
+  .kit__list,
+  .kit__swatches { justify-content: center; }
+}
+
+@media (max-width: 620px) {
+  .meme-grid  { grid-template-columns: 1fr; }
+
+  /* One per row: a banner no longer spans anything, so it goes back to its
+     own shape rather than the letterbox strip the packed layout needs. */
+  .meme--wide { grid-column: span 1; }
+  .meme--wide .meme__frame { aspect-ratio: 16 / 9; }
+
+  .lightbox__nav  { width: 42px; height: 42px; }
+  .lightbox__nav--prev { left:  var(--space-2); }
+  .lightbox__nav--next { right: var(--space-2); }
+  .lightbox__close     { top: var(--space-2); right: var(--space-2); }
+  .lightbox__img       { max-height: 54vh; }
+  .lightbox__actions   { margin-left: 0; }
+}

@@ -1,0 +1,154 @@
+/* ==========================================================================
+   LAYOUT — page shell, containers, sections, grids, ambient background
+   Depends on: tokens.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Page shell
+   -------------------------------------------------------------------------- */
+.site-main {
+  position: relative;
+  z-index: 2;                                /* above orbs + grain */
+}
+
+/* --------------------------------------------------------------------------
+   2. Containers
+   -------------------------------------------------------------------------- */
+.container {
+  position: relative;
+  width: min(var(--width-page), 100% - (var(--gutter) * 2));
+  margin-inline: auto;
+}
+
+.container--narrow {
+  width: min(var(--width-narrow), 100% - (var(--gutter) * 2));
+}
+
+/* --------------------------------------------------------------------------
+   3. Sections
+   -------------------------------------------------------------------------- */
+.section {
+  position: relative;
+  padding: var(--space-10) 0;
+}
+
+.section--tight { padding-top: var(--space-5); }
+.section--flush { padding-top: 0; }
+
+/* Header block at the top of every inner page */
+.page-header {
+  padding: 168px 0 var(--space-3);
+  text-align: center;
+}
+
+.page-header h1 {
+  margin-top: var(--space-2);
+  font-size: var(--text-h1);
+}
+
+/* --------------------------------------------------------------------------
+   4. Grid objects
+   Reusable column layouts — collapse to 2 columns on tablet, 1 on phone.
+   -------------------------------------------------------------------------- */
+.grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+/* --------------------------------------------------------------------------
+   5. Ambient background — drifting orbs + rising bubbles
+   Fixed, decorative, non-interactive. Always aria-hidden in the markup.
+   -------------------------------------------------------------------------- */
+.orb {
+  position: fixed;
+  z-index: 0;
+  border-radius: 50%;
+  opacity: .5;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: orb-drift 16s ease-in-out infinite alternate;
+}
+
+.orb--1 {
+  top: -160px;
+  left: -140px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(245, 206, 77, .32), transparent 65%);
+}
+
+.orb--2 {
+  top: 30%;
+  right: -220px;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(92, 227, 242, .24), transparent 65%);
+  animation-delay: -5s;
+}
+
+.orb--3 {
+  bottom: -180px;
+  left: 22%;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(155, 77, 224, .28), transparent 65%);
+  animation-delay: -9s;
+}
+
+@keyframes orb-drift {
+  from { transform: translate(0, 0)       scale(1); }
+  to   { transform: translate(50px, 36px) scale(1.12); }
+}
+
+/* Bubble layer — individual .bubble nodes are injected by js/site.js */
+.bubbles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -50px;
+  left: var(--bubble-left);
+  width: var(--bubble-size);
+  height: var(--bubble-size);
+  border: 1px solid rgba(250, 230, 160, .22);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 28%,
+              rgba(250, 230, 160, .55),
+              rgba(245, 206, 77, .14) 58%,
+              transparent 72%);
+  animation: bubble-rise var(--bubble-duration) linear infinite;
+  animation-delay: var(--bubble-delay);
+}
+
+@keyframes bubble-rise {
+  0%   { transform: translate(0, 0);                       opacity: 0; }
+  8%   {                                                   opacity: .75; }
+  92%  {                                                   opacity: .5; }
+  100% { transform: translate(var(--bubble-drift), -112vh); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   6. Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .grid--3,
+  .grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .grid--2,
+  .grid--3,
+  .grid--4 { grid-template-columns: 1fr; }
+
+  .section     { padding: var(--space-9) 0; }
+  .page-header { padding-top: 140px; }
+}

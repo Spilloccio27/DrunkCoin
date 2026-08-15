@@ -1,0 +1,108 @@
+/* ==========================================================================
+   DRUNK COIN — DESIGN TOKENS
+   --------------------------------------------------------------------------
+   Single source of truth for colour, type, spacing, radius, shadow, motion.
+   No other stylesheet should hard-code a hex value or a magic number.
+   This file must be loaded FIRST: everything else depends on it.
+   ========================================================================== */
+
+:root {
+
+  /* --- Brand colours ----------------------------------------------------- */
+  /* Sampled straight off the artwork in assets/gallery. The darks in those
+     scenes are indigo-blue (hue ~238), not purple-black, and the neon that
+     carries every frame is cyan — so cyan is a first-class accent here. */
+  --c-bg:            #080a28;                 /* page background — warehouse indigo           */
+  --c-bg-raised:     #1b1140;                 /* lifted surface (timeline dots, chips)        */
+  --c-ink:           #f2f5ff;                 /* primary text — neon white                    */
+  --c-ink-invert:    #1e1405;                 /* text sitting on gold surfaces                */
+  --c-muted:         #a8b2e4;                 /* secondary text                               */
+
+  --c-gold:          #f5ce4d;                 /* the coin itself                              */
+  --c-gold-soft:     #fae6a0;                 /* gold highlight / gradient top                */
+  --c-cyan:          #5ce3f2;                 /* the dominant neon in the art                 */
+  --c-pink:          #ff4fe0;                 /* magenta neon — signs, sells                  */
+  --c-purple:        #9b4de0;                 /* the haze behind every dance floor            */
+  --c-green:         #2bf0a4;                 /* solana green — "live", buys                  */
+
+  /* --- Surfaces & lines --------------------------------------------------- */
+  --c-surface:       rgba(255, 255, 255, .045);
+  --c-surface-hi:    rgba(255, 255, 255, .07);
+  --c-line:          rgba(255, 255, 255, .12);
+  --c-line-accent:   rgba(245, 206, 77, .5);
+  --c-nav-bg:        rgba(8, 10, 40, .82);
+  --c-overlay:       rgba(8, 10, 40, .96);
+
+  /* --- Typography --------------------------------------------------------- */
+  /* Matched to the lettering in the art: chunky cartoon caps for headlines,
+     a real neon-tube face for the signs, rounded geometric sans for reading,
+     and the marker that the coin's own "DRUNK COIN" is drawn in. */
+  --font-display:    'Luckiest Guy', system-ui, sans-serif;   /* headings, buttons  */
+  --font-neon:       'Monoton', system-ui, sans-serif;        /* neon-sign moments  */
+  --font-body:       'Fredoka', system-ui, sans-serif;        /* everything else    */
+  --font-marker:     'Permanent Marker', cursive;             /* handwritten notes  */
+
+  /* Luckiest Guy is drawn for size — below ~.85rem its thick strokes close up
+     and the counters fill in. Anything smaller than that uses this instead:
+     same rounded family as the body text, just heavier and tracked out. */
+  --font-ui:         'Fredoka', system-ui, sans-serif;        /* micro-labels, tabs */
+
+  --text-xs:         .78rem;
+  --text-sm:         .88rem;
+  --text-base:       .95rem;
+  --text-md:         1.05rem;
+  --text-lg:         1.15rem;
+
+  --text-h3:         clamp(.98rem, 1.6vw, 1.15rem);
+  --text-h2:         clamp(1.9rem, 5vw,  3rem);
+  --text-h1:         clamp(2.3rem, 7vw,  4.2rem);
+  /* Sized for the hero's right-hand column, not the full page width */
+  --text-hero:       clamp(3.4rem, 9vw,   7.4rem);
+  --text-hero-sub:   clamp(1.7rem, 4.4vw, 3.4rem);
+
+  --tracking-wide:   .14em;                   /* uppercase micro-labels */
+  --tracking-tight:  .02em;
+
+  /* --- Spacing scale ------------------------------------------------------ */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  26px;
+  --space-7:  34px;
+  --space-8:  44px;
+  --space-9:  64px;
+  --space-10: 88px;
+
+  /* --- Radii -------------------------------------------------------------- */
+  --radius-sm:   10px;
+  --radius-md:   18px;
+  --radius-lg:   22px;
+  --radius-xl:   30px;
+  --radius-pill: 999px;
+
+  /* --- Shadows & glows ---------------------------------------------------- */
+  --glow-gold:       0 0 6px rgba(245, 206, 77, .55), 0 0 26px rgba(245, 206, 77, .32);
+  --glow-gold-lg:    0 0 10px rgba(245, 206, 77, .55), 0 0 40px rgba(245, 206, 77, .35),
+                     0 8px 80px rgba(255, 79, 224, .3);
+  --glow-pink:       0 0 8px rgba(255, 79, 224, .8), 0 0 24px rgba(255, 79, 224, .5);
+  --glow-cyan:       0 0 8px rgba(92, 227, 242, .75), 0 0 26px rgba(92, 227, 242, .45);
+  --shadow-card:     0 22px 54px rgba(0, 0, 0, .45);
+  --shadow-gold:     0 10px 34px rgba(245, 206, 77, .35);
+  --shadow-gold-lg:  0 18px 48px rgba(245, 206, 77, .5);
+  --shadow-paper:    0 30px 70px rgba(0, 0, 0, .5), 0 4px 14px rgba(0, 0, 0, .35);
+
+  /* --- Motion ------------------------------------------------------------- */
+  --ease-out:  cubic-bezier(.2, .8, .2, 1);
+  --dur-fast:  .2s;
+  --dur-base:  .3s;
+  --dur-slow:  .7s;
+
+  /* --- Layout ------------------------------------------------------------- */
+  --width-page:   1120px;
+  --width-narrow: 780px;
+  --width-text:   620px;
+  --gutter:       20px;
+  --nav-height:   78px;
+}

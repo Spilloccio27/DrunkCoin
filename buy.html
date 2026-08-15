@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Get Ready — Drunk Coin ($DRUNK)</title>
+  <meta name="description" content="$DRUNK has not launched. Four things to sort out before the doors open — wallet, practice, official channels, and the countdown. Plus the Drunk FAQ.">
+  <meta name="theme-color" content="#080a28">
+
+  <!-- Social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Drunk Coin">
+  <meta property="og:title" content="Get Ready for $DRUNK">
+  <meta property="og:description" content="Nothing to buy yet. Everything to get ready for.">
+  <meta property="og:image" content="assets/brand/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="assets/brand/og.jpg">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&family=Monoton&family=Permanent+Marker&display=swap">
+
+  <!-- Styles (cascade order matters) -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/drunk-mode.css">
+  <link rel="stylesheet" href="css/countdown.css">
+</head>
+
+<body data-page="buy">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============================ AMBIENT BACKGROUND ======================= -->
+<div class="orb orb--1" aria-hidden="true"></div>
+<div class="orb orb--2" aria-hidden="true"></div>
+<div class="orb orb--3" aria-hidden="true"></div>
+<div class="bubbles" id="bubbles" aria-hidden="true"></div>
+
+<!-- ============================ NAV ===================================== -->
+<!-- Identical on every page. The active link comes from body[data-page]. -->
+<header class="site-nav" id="site-nav">
+  <div class="container site-nav__inner">
+    <a class="brand" href="index.html" data-nav="home" aria-label="Drunk Coin — home">
+      <img class="brand__logo" src="assets/brand/logo-96.png" alt="" width="38" height="38">
+      <span class="brand__primary">DRUNK</span><span class="brand__outline">COIN</span>
+    </a>
+
+    <nav class="site-nav__links" aria-label="Main">
+      <a class="nav-link" href="story.html"      data-nav="story">The Story</a>
+      <a class="nav-link" href="tokenomics.html" data-nav="tokenomics">Drunkonomics</a>
+      <a class="nav-link" href="gallery.html"    data-nav="gallery">Meme Vault</a>
+      <a class="nav-link" href="buy.html"        data-nav="buy">Get Ready</a>
+      <a class="nav-link" href="party.html"      data-nav="party">The Party</a>
+    </nav>
+
+    <div class="site-nav__actions">
+      <button class="drunk-toggle" data-drunk-toggle aria-pressed="false">🍺 Drunk Mode</button>
+      <a class="btn btn--gold btn--sm" href="party.html">Join the Party</a>
+      <button class="menu-btn" data-menu-open aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <button class="mobile-menu__close" data-menu-close aria-label="Close menu">✕</button>
+  <a href="index.html"      data-nav="home">Home</a>
+  <a href="story.html"      data-nav="story">The Story</a>
+  <a href="tokenomics.html" data-nav="tokenomics">Drunkonomics</a>
+  <a href="gallery.html"    data-nav="gallery">Meme Vault</a>
+  <a href="buy.html"        data-nav="buy">Get Ready</a>
+  <a href="party.html"      data-nav="party">The Party</a>
+  <button class="drunk-toggle" data-drunk-toggle aria-pressed="false">🍺 Drunk Mode</button>
+</div>
+
+<!-- ============================ MAIN ==================================== -->
+<main class="site-main page-enter" id="main">
+
+  <div class="page-header container">
+    <p class="eyebrow reveal">before the doors open</p>
+    <h1 class="neon reveal" style="--delay:.08s">GET READY</h1>
+    <p class="lede reveal" style="--delay:.16s">
+      Nothing is on sale yet. Here's what to sort out while the clock runs down.
+    </p>
+  </div>
+
+  <!-- ---------------------------- LAUNCH COUNTDOWN --------------------- -->
+  <!-- Ticks down to launchDate in js/config.js, and hides itself if that
+       date is missing. Once it hits zero the clock swaps for the "we're
+       live" panel. See js/countdown.js. -->
+  <section class="section section--tight" id="launch" data-countdown-root style="scroll-margin-top:96px">
+    <div class="container">
+      <div class="countdown reveal">
+        <p class="eyebrow">the doors aren't open yet</p>
+        <h2 class="neon">LAUNCHING IN</h2>
+
+        <!-- Announced through the live region below instead — a screen reader
+             reading four numbers a second is unusable. -->
+        <div class="countdown__clock" data-countdown-clock aria-hidden="true">
+          <div class="countdown__unit">
+            <b class="countdown__value" data-countdown="days">--</b>
+            <span class="countdown__label">Days</span>
+          </div>
+          <div class="countdown__unit">
+            <b class="countdown__value" data-countdown="hours">--</b>
+            <span class="countdown__label">Hours</span>
+          </div>
+          <div class="countdown__unit">
+            <b class="countdown__value" data-countdown="minutes">--</b>
+            <span class="countdown__label">Minutes</span>
+          </div>
+          <div class="countdown__unit countdown__unit--seconds">
+            <b class="countdown__value" data-countdown="seconds">--</b>
+            <span class="countdown__label">Seconds</span>
+          </div>
+        </div>
+
+        <div class="countdown__live" data-countdown-live hidden>
+          <h3>🍻 THE BAR IS OPEN</h3>
+          <p>$DRUNK is live on Solana. Head to the official channels for everything you need.</p>
+        </div>
+
+        <p class="countdown__date" data-countdown-date></p>
+
+        <p class="countdown__note">
+          $DRUNK isn't trading yet — there is <b>no contract address</b> until this clock hits zero.
+          Anything selling under our name before then is fake.
+        </p>
+
+        <p class="visually-hidden" role="status" aria-live="polite" data-countdown-status></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------------------- STEPS -------------------------------- -->
+  <!-- Preparation only. Nothing here tells anyone to acquire $DRUNK, because
+       $DRUNK does not exist yet — see the note under the list. -->
+  <section class="section" aria-label="Getting ready">
+    <div class="container">
+      <ol class="grid grid--4">
+
+        <li class="card card--step tilt-left reveal">
+          <span class="card__emoji" aria-hidden="true">👛</span>
+          <span class="card__step-number" aria-hidden="true">01</span>
+          <h2>Get a Wallet</h2>
+          <p>Download Phantom or Solflare. Guard your seed phrase like it's the last cold beer at the party — never share it with anyone, ever.</p>
+        </li>
+
+        <li class="card card--step tilt-right reveal" style="--delay:.08s">
+          <span class="card__emoji" aria-hidden="true">💜</span>
+          <span class="card__step-number" aria-hidden="true">02</span>
+          <h2>Learn Your Way Around</h2>
+          <p>Have a poke at your new wallet while there's nothing at stake. Knowing where the buttons are beats learning at 3AM.</p>
+        </li>
+
+        <li class="card card--step tilt-left reveal" style="--delay:.16s">
+          <span class="card__emoji" aria-hidden="true">💬</span>
+          <span class="card__step-number" aria-hidden="true">03</span>
+          <h2>Join the Channels</h2>
+          <p>X and Telegram are the only two places we post. Anything official will come from there and nowhere else — no DMs, no exceptions.</p>
+        </li>
+
+        <li class="card card--step tilt-right reveal" style="--delay:.24s">
+          <span class="card__emoji" aria-hidden="true">⏰</span>
+          <span class="card__step-number" aria-hidden="true">04</span>
+          <h2>Watch the Clock</h2>
+          <p>That's genuinely it. When the countdown above hits zero, the announcement goes out. Until then there's nothing to do but hang around.</p>
+        </li>
+
+      </ol>
+
+      <div class="card card--note reveal">
+        <b>There is no $DRUNK token yet.</b> No contract address, no presale, no whitelist, no
+        early allocation — none of it exists, and we will never DM you about any of it. If you
+        see a $DRUNK trading anywhere before the clock above runs out, somebody is trying to rob
+        you. When the real thing launches you'll hear it from
+        <a href="party.html">our own channels</a> first.
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------------------- FAQ ---------------------------------- -->
+  <section class="section section--tight">
+    <div class="container">
+
+      <header class="section-head reveal">
+        <p class="eyebrow">questions from the bar</p>
+        <h2 class="neon">DRUNK FAQ</h2>
+      </header>
+
+      <div class="faq">
+
+        <div class="faq__item reveal">
+          <button class="faq__question" type="button">
+            Is this financial advice?
+            <span class="faq__chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq__answer">
+            <p>Absolutely not. We are literally drunk. Nothing here is an offer or a solicitation — there is nothing to offer yet. $DRUNK is entertainment: always do your own research, and never spend money you can't afford to lose.</p>
+          </div>
+        </div>
+
+        <div class="faq__item reveal" style="--delay:.06s">
+          <button class="faq__question" type="button">
+            Wen launch?
+            <span class="faq__chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq__answer">
+            <p>The clock at the top of this page is the answer, down to the second. After that? Wen last call — which, at this bar, is never. But remember the house rule: no promises. We're here for the party, not the prophecy.</p>
+          </div>
+        </div>
+
+        <div class="faq__item reveal" style="--delay:.12s">
+          <button class="faq__question" type="button">
+            Is there a roadmap?
+            <span class="faq__chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq__answer">
+            <p>We drew one on a napkin once. Then we lost the napkin. There's a loose "Bar Map" on the <a href="party.html">Party page</a>, but honestly — the plan is vibes.</p>
+          </div>
+        </div>
+
+        <div class="faq__item reveal" style="--delay:.18s">
+          <button class="faq__question" type="button">
+            Who's the team?
+            <span class="faq__chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq__answer">
+            <p>You're looking at it — the community runs the show. Ownership gets renounced at launch, chairs optional, everyone pours.</p>
+          </div>
+        </div>
+
+        <div class="faq__item reveal" style="--delay:.24s">
+          <button class="faq__question" type="button">
+            What's the utility?
+            <span class="faq__chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq__answer">
+            <p>Fun. The rarest utility in crypto. Plus memes, a group chat that never sleeps, and a community that shows up for each other.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ FOOTER ================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__logo" src="assets/brand/logo-96.png" alt="" width="38" height="38">
+          <span class="brand__primary">DRUNK</span><span class="brand__outline">COIN</span>
+        </a>
+        <p class="site-footer__tagline">
+          The ultimate party token on Solana — not out yet. Drink responsibly, and keep
+          an eye on the clock.
+        </p>
+      </div>
+
+      <div>
+        <h2>The Bar</h2>
+        <div class="site-footer__links">
+          <a href="story.html">The Story</a>
+          <a href="tokenomics.html">Drunkonomics</a>
+          <a href="gallery.html">Meme Vault</a>
+          <a href="buy.html">Get Ready</a>
+          <a href="party.html">The Party</a>
+        </div>
+      </div>
+
+      <div>
+        <h2>The Crew</h2>
+        <div class="site-footer__links">
+          <a href="#" data-social="x">X / Twitter</a>
+          <a href="#" data-social="telegram">Telegram</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="site-footer__disclaimer">
+      Drunk Coin ($DRUNK) has not launched. Nothing is on sale here, there is no contract address yet, and
+      this site is not an offer, solicitation or invitation to buy anything — treat any token, address or
+      presale claiming to be $DRUNK before launch as a scam. $DRUNK is a meme coin created for entertainment
+      purposes only: it has no intrinsic value, no utility, and no expectation of financial return, and
+      nothing on this website is financial advice. Alcohol references are for humor — you must be of legal
+      drinking age in your jurisdiction, and please always drink responsibly, and never drive after
+      drinking. 🍻
+    </p>
+
+    <p class="site-footer__copyright">
+      © <span id="year">2026</span> Drunk Coin. All rights reserved. Made with 🍺 and questionable decisions.
+    </p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/config.js"></script>
+<script src="js/site.js"></script>
+<script src="js/countdown.js"></script>
+</body>
+</html>

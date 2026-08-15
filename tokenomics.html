@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Drunkonomics — Drunk Coin ($DRUNK)</title>
+  <meta name="description" content="$DRUNK tokenomics: 1,000,000,000 supply, 0/0 tax, LP burned, ownership renounced. Example launch figures, simple enough to read after a few rounds.">
+  <meta name="theme-color" content="#080a28">
+
+  <!-- Social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Drunk Coin">
+  <meta property="og:title" content="Drunkonomics — the $DRUNK numbers">
+  <meta property="og:description" content="1B supply, 0/0 tax, LP burned, ownership renounced. Numbers simple enough to read after a few rounds.">
+  <meta property="og:image" content="assets/brand/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="assets/brand/og.jpg">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&family=Monoton&family=Permanent+Marker&display=swap">
+
+  <!-- Styles (cascade order matters) -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/drunk-mode.css">
+</head>
+
+<body data-page="tokenomics">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============================ AMBIENT BACKGROUND ======================= -->
+<div class="orb orb--1" aria-hidden="true"></div>
+<div class="orb orb--2" aria-hidden="true"></div>
+<div class="orb orb--3" aria-hidden="true"></div>
+<div class="bubbles" id="bubbles" aria-hidden="true"></div>
+
+<!-- ============================ NAV ===================================== -->
+<!-- Identical on every page. The active link comes from body[data-page]. -->
+<header class="site-nav" id="site-nav">
+  <div class="container site-nav__inner">
+    <a class="brand" href="index.html" data-nav="home" aria-label="Drunk Coin — home">
+      <img class="brand__logo" src="assets/brand/logo-96.png" alt="" width="38" height="38">
+      <span class="brand__primary">DRUNK</span><span class="brand__outline">COIN</span>
+    </a>
+
+    <nav class="site-nav__links" aria-label="Main">
+      <a class="nav-link" href="story.html"      data-nav="story">The Story</a>
+      <a class="nav-link" href="tokenomics.html" data-nav="tokenomics">Drunkonomics</a>
+      <a class="nav-link" href="gallery.html"    data-nav="gallery">Meme Vault</a>
+      <a class="nav-link" href="buy.html"        data-nav="buy">Get Ready</a>
+      <a class="nav-link" href="party.html"      data-nav="party">The Party</a>
+    </nav>
+
+    <div class="site-nav__actions">
+      <button class="drunk-toggle" data-drunk-toggle aria-pressed="false">🍺 Drunk Mode</button>
+      <a class="btn btn--gold btn--sm" href="party.html">Join the Party</a>
+      <button class="menu-btn" data-menu-open aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <button class="mobile-menu__close" data-menu-close aria-label="Close menu">✕</button>
+  <a href="index.html"      data-nav="home">Home</a>
+  <a href="story.html"      data-nav="story">The Story</a>
+  <a href="tokenomics.html" data-nav="tokenomics">Drunkonomics</a>
+  <a href="gallery.html"    data-nav="gallery">Meme Vault</a>
+  <a href="buy.html"        data-nav="buy">Get Ready</a>
+  <a href="party.html"      data-nav="party">The Party</a>
+  <button class="drunk-toggle" data-drunk-toggle aria-pressed="false">🍺 Drunk Mode</button>
+</div>
+
+<!-- ============================ MAIN ==================================== -->
+<main class="site-main page-enter" id="main">
+
+  <div class="page-header container">
+    <p class="eyebrow reveal">the numbers</p>
+    <h1 class="neon reveal" style="--delay:.08s">DRUNKONOMICS</h1>
+    <p class="lede reveal" style="--delay:.16s">
+      Numbers simple enough to read after a few rounds. That's by design.
+    </p>
+  </div>
+
+  <!-- ---------------------------- KEY FIGURES -------------------------- -->
+  <section class="section" aria-label="Key token figures">
+    <div class="container">
+      <div class="grid grid--4">
+
+        <article class="card card--token tilt-left reveal">
+          <span class="card__emoji" aria-hidden="true">🍺</span>
+          <b class="card__figure">1,000,000,000</b>
+          <h2>Total Supply</h2>
+          <p>One billion $DRUNK. Round numbers are easier to count when you're seeing double.</p>
+        </article>
+
+        <article class="card card--token tilt-right reveal" style="--delay:.08s">
+          <span class="card__emoji" aria-hidden="true">🚫</span>
+          <b class="card__figure">0% / 0%</b>
+          <h2>Planned Tax</h2>
+          <p>Free refills, no cover charge — that's the plan on the night. Nothing skimmed on the way in or out.</p>
+        </article>
+
+        <article class="card card--token tilt-left reveal" style="--delay:.16s">
+          <span class="card__emoji" aria-hidden="true">🔥</span>
+          <b class="card__figure" data-count="100" data-suffix="%">0%</b>
+          <h2>LP Burned</h2>
+          <p>The liquidity keys go straight to the bottom of the ocean on launch night. The keg belongs to everyone.</p>
+        </article>
+
+        <article class="card card--token tilt-right reveal" style="--delay:.24s">
+          <span class="card__emoji" aria-hidden="true">🤝</span>
+          <b class="card__figure">RENOUNCED</b>
+          <h2>Contract Ownership</h2>
+          <p>To be renounced at launch. Nobody's driving — that's the point, so no one can change the rules mid-party.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------------------- THE POUR ----------------------------- -->
+  <section class="section section--flush">
+    <div class="container">
+
+      <header class="section-head reveal">
+        <p class="eyebrow">how it's poured</p>
+        <h2 class="neon">THE POUR</h2>
+        <p class="lede">Where every last drop of the supply goes.</p>
+      </header>
+
+      <div class="pour">
+        <div class="pour__row reveal">
+          <div class="pour__top">
+            <span class="pour__label">Liquidity Pool <span class="pour__nickname">"the keg"</span></span>
+            <span class="pour__percent">85%</span>
+          </div>
+          <div class="pour__bar">
+            <div class="pour__fill pour__fill--gold" data-width="85"></div>
+          </div>
+        </div>
+
+        <div class="pour__row reveal" style="--delay:.1s">
+          <div class="pour__top">
+            <span class="pour__label">Community &amp; Memes <span class="pour__nickname">"the party fund"</span></span>
+            <span class="pour__percent">10%</span>
+          </div>
+          <div class="pour__bar">
+            <div class="pour__fill pour__fill--pink" data-width="10"></div>
+          </div>
+        </div>
+
+        <div class="pour__row reveal" style="--delay:.2s">
+          <div class="pour__top">
+            <span class="pour__label">CEX Reserve <span class="pour__nickname">"top shelf"</span></span>
+            <span class="pour__percent">5%</span>
+          </div>
+          <div class="pour__bar">
+            <div class="pour__fill pour__fill--purple" data-width="5"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card--note reveal">
+        <b>The fine print (read it sober):</b> figures above are example launch parameters — final numbers drop
+        with the official announcement on our channels. If the numbers on the chain ever disagree with the numbers
+        on the napkin, trust the chain. Always verify everything yourself, and remember nothing is live yet.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ---------------------------- CTA ---------------------------------- -->
+  <section class="section">
+    <div class="container">
+      <div class="banner reveal">
+        <p class="eyebrow">numbers checked out?</p>
+        <h2 class="neon">THE KEG ISN'T<br>TAPPED YET</h2>
+        <p class="lede">Final figures land with the official announcement. Be in the room when they do.</p>
+        <p><a class="btn btn--gold btn--lg" href="party.html">🎉 Join the Party</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ FOOTER ================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__logo" src="assets/brand/logo-96.png" alt="" width="38" height="38">
+          <span class="brand__primary">DRUNK</span><span class="brand__outline">COIN</span>
+        </a>
+        <p class="site-footer__tagline">
+          The ultimate party token on Solana — not out yet. Drink responsibly, and keep
+          an eye on the clock.
+        </p>
+      </div>
+
+      <div>
+        <h2>The Bar</h2>
+        <div class="site-footer__links">
+          <a href="story.html">The Story</a>
+          <a href="tokenomics.html">Drunkonomics</a>
+          <a href="gallery.html">Meme Vault</a>
+          <a href="buy.html">Get Ready</a>
+          <a href="party.html">The Party</a>
+        </div>
+      </div>
+
+      <div>
+        <h2>The Crew</h2>
+        <div class="site-footer__links">
+          <a href="#" data-social="x">X / Twitter</a>
+          <a href="#" data-social="telegram">Telegram</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="site-footer__disclaimer">
+      Drunk Coin ($DRUNK) has not launched. Nothing is on sale here, there is no contract address yet, and
+      this site is not an offer, solicitation or invitation to buy anything — treat any token, address or
+      presale claiming to be $DRUNK before launch as a scam. $DRUNK is a meme coin created for entertainment
+      purposes only: it has no intrinsic value, no utility, and no expectation of financial return, and
+      nothing on this website is financial advice. Alcohol references are for humor — you must be of legal
+      drinking age in your jurisdiction, and please always drink responsibly, and never drive after
+      drinking. 🍻
+    </p>
+
+    <p class="site-footer__copyright">
+      © <span id="year">2026</span> Drunk Coin. All rights reserved. Made with 🍺 and questionable decisions.
+    </p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/config.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
