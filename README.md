@@ -37,7 +37,8 @@ countdown in `launchDate`. See [Turning the site on at launch](#turning-the-site
 │   ├── site.js         Shared behaviour, loaded on every page
 │   ├── gallery-data.js The meme catalogue — one entry per image
 │   ├── gallery.js      Meme grid, filters and lightbox (gallery.html only)
-│   └── countdown.js    Launch countdown (index.html, buy.html, party.html)
+│   ├── countdown.js    Launch countdown (index.html, buy.html, party.html)
+│   └── posts.js        "Latest on X" post links (party.html only)
 │
 └── assets/
     ├── favicon.svg
@@ -57,6 +58,7 @@ Everything that changes at launch lives in **`js/config.js`**:
 |---|---|
 | `launchDate` | When the doors open, as an ISO 8601 string (`2026-08-29T16:20:00Z`). Drives every countdown on the site. Empty or unparseable → the countdown blocks hide themselves. |
 | `socials` | X and Telegram URLs — the only two channels the site links to. An empty one stays disabled and shows a "coming soon" toast instead of navigating. |
+| `posts` | Posts to feature from X on `party.html` — one entry per post (`url`, `text`, `date`, optional `pinned`). Empty list → the block shows one card pointing at the account's feed instead. See [Linking the X posts](#linking-the-x-posts). |
 | `contract` | The SPL mint address. Nothing prints it yet — no page has a `data-contract` element — but `js/site.js` still fills any element that gets one, so it's here ready for launch day. |
 
 **One thing that isn't in `config.js`:** the `og:image` / `twitter:image` tags
@@ -64,6 +66,40 @@ point at `assets/brand/og.jpg` with a *relative* path. Most scrapers resolve
 that fine, but X and Facebook prefer absolute URLs — once you have the domain,
 find-and-replace `content="assets/brand/og.jpg"` with the full
 `https://yourdomain.com/assets/brand/og.jpg` across the `.html` files.
+
+
+## Linking the X posts
+
+`party.html` carries a **Latest on X** block under the two channel cards. Every
+card in it is an ordinary `<a>` to a post on X — the site loads no widget
+script, calls no API and keeps working offline, which is the same deal as the
+rest of the pages here. The trade is that the list is kept by hand, in
+`posts` in `js/config.js`:
+
+```js
+posts: [
+  {
+    url:    "https://x.com/_DrunkCoin_/status/1234567890123456789",
+    text:   "The bar opens 29 Aug, 16:20 UTC. 🍻",
+    date:   "12 Aug 2026",
+    pinned: true            // optional — adds the 📌 chip
+  }
+]
+```
+
+Copy `url` straight off the post ("Copy link" on X). Newest first: they render
+in the order you write them.
+
+| `posts` | Result |
+|---|---|
+| Empty (as shipped) | The block still renders, with one card and the button below it pointing at `socials.x` — never a dead section |
+| One or more entries | One card per post, plus the "read every post on X" button |
+| Entry with no `url` | That entry is skipped — a post card that goes nowhere is worse than one card fewer |
+
+If `socials.x` is empty *and* `posts` is empty, the whole block hides itself.
+With posts listed but no `socials.x`, the cards still work — only the `@handle`
+above each quote falls back to `$DRUNK`, since there is no profile URL to read
+it from.
 
 
 ## The launch countdown
@@ -218,13 +254,15 @@ re-centres the number on every tick and the whole clock wobbles.
   `data-drunk-toggle`, `data-copy-contract`, `data-contract`, `data-social`,
   `data-menu-open`, `data-menu-close`, `data-count`, `data-width`, `data-nav`,
   `data-countdown-root`, `data-countdown-clock`, `data-countdown-live`,
-  `data-countdown-date`, `data-countdown-status`, `data-countdown`.
+  `data-countdown-date`, `data-countdown-status`, `data-countdown`,
+  `data-posts-root`, `data-posts-grid`, `data-posts-empty`.
 - **No hard-coded colours** outside `css/tokens.css`. The one unavoidable
   exception is `rgba()` glows and gradients, which need the channels inline —
   if you retune a brand colour, grep the other stylesheets for its old RGB
   triplet as well.
 - **Scroll reveals**: add `class="reveal"` to any element; stagger siblings with
-  an inline `style="--delay:.08s"`.
+  an inline `style="--delay:.08s"`. `js/site.js` collects them once, at load, so
+  anything rendered later needs its own observer — see `js/posts.js`.
 
 ## Adding a page
 

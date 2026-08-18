@@ -29,5 +29,29 @@ window.DRUNK_CONFIG = {
   socials: {
     x:        "https://x.com/_DrunkCoin_",
     telegram: "https://t.me/+Gq7VfXcdVPEwMTUy"
-  }
+  },
+
+  /* --- Posts to feature from X -------------------------------------------
+     The "Latest on X" block on party.html. One entry per post, newest first:
+
+       url    Link to the post itself — copy it straight off X, it looks like
+              "https://x.com/_DrunkCoin_/status/1234567890123456789".
+              An entry without one is skipped.
+       text   The post, or the part of it worth quoting on the site.
+       date   Free text printed under the quote ("29 Aug 2026", "launch night").
+       pinned Optional. Marks the card with a 📌 chip.
+
+     Leave the list empty and the block still shows, with a single card
+     pointing at the account's feed instead — so it is never a dead section
+     before the first post goes out. Nothing here is fetched from X: the site
+     stays dependency-free, and these are plain links you keep by hand.
+     See js/posts.js. */
+  posts: [
+    // {
+    //   url:  "https://x.com/_DrunkCoin_/status/0000000000000000000",
+    //   text: "The bar opens 29 Aug, 16:20 UTC. No contract address before then — anything selling $DRUNK tonight is fake. 🍻",
+    //   date: "pinned post",
+    //   pinned: true
+    // }
+  ]
 };

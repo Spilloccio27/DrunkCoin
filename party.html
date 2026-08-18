@@ -123,6 +123,41 @@
     </div>
   </section>
 
+  <!-- ---------------------------- LATEST ON X --------------------------- -->
+  <!-- Built from DRUNK_CONFIG.posts by js/posts.js. Every card is a plain
+       link to the post on X — no embed script, nothing fetched. With an empty
+       list the fallback card below points at the feed instead. -->
+  <section class="section section--tight" id="posts" data-posts-root style="scroll-margin-top:96px">
+    <div class="container container--narrow">
+
+      <header class="section-head reveal">
+        <p class="eyebrow">straight from the feed</p>
+        <h2 class="neon">LATEST ON X</h2>
+        <p class="lede">Every announcement lands on X first. These go straight to the posts themselves.</p>
+      </header>
+
+      <div class="posts" data-posts-grid hidden></div>
+
+      <a class="card card--post card--post-empty reveal" href="#" data-social="x" data-posts-empty hidden>
+        <div class="post__head">
+          <span class="post__icon" aria-hidden="true">🐦</span>
+          <span class="post__author">the feed</span>
+        </div>
+        <blockquote class="post__text">
+          Nothing worth quoting yet — the account is warming up. Everything lands here first.
+        </blockquote>
+        <div class="post__meta">
+          <span class="post__date">pre-launch</span>
+          <span class="post__open">open on X ↗</span>
+        </div>
+      </a>
+
+      <p class="text-center reveal" style="--delay:.08s;margin-top:30px">
+        <a class="btn btn--ghost" href="#" data-social="x">🐦 Read every post on X</a>
+      </p>
+    </div>
+  </section>
+
   <!-- ---------------------------- LAUNCH COUNTDOWN --------------------- -->
   <!-- Ticks down to launchDate in js/config.js, and hides itself if that
        date is missing. Once it hits zero the clock swaps for the "we're
@@ -314,5 +349,6 @@
 <script src="js/config.js"></script>
 <script src="js/site.js"></script>
 <script src="js/countdown.js"></script>
+<script src="js/posts.js"></script>
 </body>
 </html>
