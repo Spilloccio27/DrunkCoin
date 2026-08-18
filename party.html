@@ -124,9 +124,10 @@
   </section>
 
   <!-- ---------------------------- LATEST ON X --------------------------- -->
-  <!-- Built from DRUNK_CONFIG.posts by js/posts.js. Every card is a plain
-       link to the post on X — no embed script, nothing fetched. With an empty
-       list the fallback card below points at the feed instead. -->
+  <!-- Filled by js/posts.js. As shipped (postsMode "auto") the box below gets
+       X's live timeline widget, which keeps itself up to date; if it never
+       renders, the hand-kept DRUNK_CONFIG.posts cards — or the single feed
+       card under them — take its place. -->
   <section class="section section--tight" id="posts" data-posts-root style="scroll-margin-top:96px">
     <div class="container container--narrow">
 
@@ -135,6 +136,12 @@
         <h2 class="neon">LATEST ON X</h2>
         <p class="lede">Every announcement lands on X first. These go straight to the posts themselves.</p>
       </header>
+
+      <div class="posts-embed" data-posts-embed hidden></div>
+
+      <p class="posts-loading" data-posts-loading hidden role="status">
+        Pouring the latest posts from X…
+      </p>
 
       <div class="posts" data-posts-grid hidden></div>
 

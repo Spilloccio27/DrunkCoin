@@ -31,8 +31,24 @@ window.DRUNK_CONFIG = {
     telegram: "https://t.me/+Gq7VfXcdVPEwMTUy"
   },
 
+  /* --- How the "Latest on X" block on party.html is filled ---------------
+     "auto"    X's live timeline widget, which updates itself — post on X and
+               the site shows it, with nothing to edit here. If the widget
+               doesn't render (script blocked, no network, protected account)
+               the hand-kept `posts` list below takes over. Ships like this.
+     "live"    The widget, and only the widget. No silent fallback to a list
+               somebody wrote weeks ago — just the link to the feed.
+     "manual"  The `posts` list only. Nothing external loads, which is the one
+               way to keep the site free of third-party scripts.
+
+     The widget is X's own frame: its layout, its fonts, its "follow" button.
+     Pulling posts into our card design instead would take the paid X API and
+     a server to hold the key — see the README. */
+  postsMode: "auto",
+
   /* --- Posts to feature from X -------------------------------------------
-     The "Latest on X" block on party.html. One entry per post, newest first:
+     The fallback list under "auto", and the whole block under "manual".
+     One entry per post, newest first:
 
        url    Link to the post itself — copy it straight off X, it looks like
               "https://x.com/_DrunkCoin_/status/1234567890123456789".
@@ -43,9 +59,8 @@ window.DRUNK_CONFIG = {
 
      Leave the list empty and the block still shows, with a single card
      pointing at the account's feed instead — so it is never a dead section
-     before the first post goes out. Nothing here is fetched from X: the site
-     stays dependency-free, and these are plain links you keep by hand.
-     See js/posts.js. */
+     before the first post goes out. Nothing in this list is fetched from X:
+     these are plain links you keep by hand. See js/posts.js. */
   posts: [
     // {
     //   url:  "https://x.com/_DrunkCoin_/status/0000000000000000000",

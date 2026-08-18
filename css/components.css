@@ -336,6 +336,39 @@
   transform: translateX(6px) rotate(-8deg);
 }
 
+/* --- Live timeline (Latest on X) ----------------------------------------- */
+/* X's widget renders into an iframe we don't control: it brings its own type,
+   its own spacing and its own "follow" button. All this can do is give it a
+   frame that matches the cards around it, and a width that doesn't leave the
+   timeline swimming in the middle of a desktop page. */
+.posts-embed {
+  max-width: 560px;
+  margin-inline: auto;
+  padding: var(--space-4);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.posts-embed.is-visible {
+  opacity: 1;
+}
+
+/* The iframe arrives with an inline width from the widget script */
+.posts-embed iframe {
+  max-width: 100% !important;
+}
+
+/* Standing in for the timeline until X answers — and gone either way after */
+.posts-loading {
+  margin-top: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--c-muted);
+  text-align: center;
+}
+
 /* --- Post card (Latest on X) --------------------------------------------- */
 /* One card per entry in DRUNK_CONFIG.posts, rendered by js/posts.js. Two up
    on desktop, one on a phone — a quote that wraps to five lines in a third of

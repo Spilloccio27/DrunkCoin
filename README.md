@@ -1,7 +1,9 @@
 # Drunk Coin ($DRUNK) — website
 
 Static multi-page site. No build step, no dependencies: open `index.html` in a
-browser and it works.
+browser and it works. The one thing it loads from elsewhere is X's timeline
+widget on `party.html`, and that degrades to plain links — see
+[Linking the X posts](#linking-the-x-posts).
 
 **This is a pre-launch site.** $DRUNK is not out yet, so nothing here invites
 anyone to acquire it: there is no chart, no contract pill, no swap instructions
@@ -38,7 +40,7 @@ countdown in `launchDate`. See [Turning the site on at launch](#turning-the-site
 │   ├── gallery-data.js The meme catalogue — one entry per image
 │   ├── gallery.js      Meme grid, filters and lightbox (gallery.html only)
 │   ├── countdown.js    Launch countdown (index.html, buy.html, party.html)
-│   └── posts.js        "Latest on X" post links (party.html only)
+│   └── posts.js        "Latest on X" — live X timeline + fallback (party.html)
 │
 └── assets/
     ├── favicon.svg
@@ -57,8 +59,9 @@ Everything that changes at launch lives in **`js/config.js`**:
 | Field | What it does |
 |---|---|
 | `launchDate` | When the doors open, as an ISO 8601 string (`2026-08-29T16:20:00Z`). Drives every countdown on the site. Empty or unparseable → the countdown blocks hide themselves. |
-| `socials` | X and Telegram URLs — the only two channels the site links to. An empty one stays disabled and shows a "coming soon" toast instead of navigating. |
-| `posts` | Posts to feature from X on `party.html` — one entry per post (`url`, `text`, `date`, optional `pinned`). Empty list → the block shows one card pointing at the account's feed instead. See [Linking the X posts](#linking-the-x-posts). |
+| `socials` | X and Telegram URLs — the only two channels the site links to. An empty one stays disabled and shows a "coming soon" toast instead of navigating. Also where the "Latest on X" block reads the handle from. |
+| `postsMode` | How that block fills itself: `"auto"` (live widget, hand-kept list as fallback), `"live"`, or `"manual"`. See [Linking the X posts](#linking-the-x-posts). |
+| `posts` | The hand-kept list behind `"auto"` and `"manual"` — one entry per post (`url`, `text`, `date`, optional `pinned`). |
 | `contract` | The SPL mint address. Nothing prints it yet — no page has a `data-contract` element — but `js/site.js` still fills any element that gets one, so it's here ready for launch day. |
 
 **One thing that isn't in `config.js`:** the `og:image` / `twitter:image` tags
@@ -70,11 +73,42 @@ find-and-replace `content="assets/brand/og.jpg"` with the full
 
 ## Linking the X posts
 
-`party.html` carries a **Latest on X** block under the two channel cards. Every
-card in it is an ordinary `<a>` to a post on X — the site loads no widget
-script, calls no API and keeps working offline, which is the same deal as the
-rest of the pages here. The trade is that the list is kept by hand, in
-`posts` in `js/config.js`:
+`party.html` carries a **Latest on X** block under the two channel cards. How
+it fills itself is `postsMode` in `js/config.js`:
+
+| `postsMode` | What the block shows |
+|---|---|
+| `"auto"` (shipped) | X's live timeline widget, with the hand-kept `posts` list — or the single feed card — taking over if the widget never renders |
+| `"live"` | The widget only. If it doesn't render, the feed card, never a stale list |
+| `"manual"` | The `posts` list only. Nothing external loads |
+
+### The live timeline
+
+`"auto"` and `"live"` drop X's own timeline widget into the block: it shows the
+account's latest posts and keeps itself current, so posting on X is the only
+step — nothing here is edited. `js/posts.js` builds the widget's anchor from
+`socials.x`, loads `platform.twitter.com/widgets.js` once the block is coming
+up on screen, and asks for it with `dnt=true`.
+
+Two things come with it, and both are the price of "automatic":
+
+- **It's X's frame, not our cards.** Everything inside that box — type,
+  spacing, the follow button — is rendered by X in an iframe. `.posts-embed`
+  in `css/components.css` can only frame it to match the cards around it.
+- **It's a third-party script**, the only one on the site. It won't load for
+  visitors running an ad blocker, and it sets X's own cookies for the ones it
+  does load for.
+
+There is no free way around either. X's API needs a paid tier *and* a secret
+key, and a secret can't live in a static site — that route means a small
+server (or a scheduled job that commits the posts into the repo) plus the
+subscription, in exchange for posts rendered in our own card design.
+
+### The fallback list
+
+Under `"auto"` the widget failing is not a dead section: `posts` in
+`js/config.js` is rendered instead, as the site's own cards. It's also the
+whole block under `"manual"`. One entry per post, newest first:
 
 ```js
 posts: [
@@ -87,19 +121,15 @@ posts: [
 ]
 ```
 
-Copy `url` straight off the post ("Copy link" on X). Newest first: they render
-in the order you write them.
+Copy `url` straight off the post ("Copy link" on X); the `?s=…` an app share
+adds is only tracking, drop it. Entries without a `url` are skipped — a post
+card that goes nowhere is worse than one card fewer. With the list empty, the
+block shows one card and one button, both pointing at `socials.x`.
 
-| `posts` | Result |
-|---|---|
-| Empty (as shipped) | The block still renders, with one card and the button below it pointing at `socials.x` — never a dead section |
-| One or more entries | One card per post, plus the "read every post on X" button |
-| Entry with no `url` | That entry is skipped — a post card that goes nowhere is worse than one card fewer |
-
-If `socials.x` is empty *and* `posts` is empty, the whole block hides itself.
-With posts listed but no `socials.x`, the cards still work — only the `@handle`
-above each quote falls back to `$DRUNK`, since there is no profile URL to read
-it from.
+If `socials.x` is empty *and* `posts` is empty, the whole block hides itself —
+there is nothing left to point at. With posts listed but no `socials.x` the
+cards still work, and the `@handle` above each quote falls back to `$DRUNK`,
+since a handle is only ever read out of that URL.
 
 
 ## The launch countdown
@@ -255,7 +285,8 @@ re-centres the number on every tick and the whole clock wobbles.
   `data-menu-open`, `data-menu-close`, `data-count`, `data-width`, `data-nav`,
   `data-countdown-root`, `data-countdown-clock`, `data-countdown-live`,
   `data-countdown-date`, `data-countdown-status`, `data-countdown`,
-  `data-posts-root`, `data-posts-grid`, `data-posts-empty`.
+  `data-posts-root`, `data-posts-embed`, `data-posts-grid`, `data-posts-empty`,
+  `data-posts-loading`.
 - **No hard-coded colours** outside `css/tokens.css`. The one unavoidable
   exception is `rgba()` glows and gradients, which need the channels inline —
   if you retune a brand colour, grep the other stylesheets for its old RGB
