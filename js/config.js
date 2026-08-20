@@ -28,6 +28,6 @@ window.DRUNK_CONFIG = {
      toast instead of navigating anywhere. */
   socials: {
     x:        "https://x.com/_DrunkCoin_",
-    telegram: "https://t.me/+Gq7VfXcdVPEwMTUy"
+    telegram: "https://t.me/officialdrunkcoin"
   }
 };
