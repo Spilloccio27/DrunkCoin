@@ -25,9 +25,14 @@ window.DRUNK_CONFIG = {
   launchDate: "2026-08-29T16:20:00Z",
 
   /* Official channels. Empty links stay disabled and show a "coming soon"
-     toast instead of navigating anywhere. */
+     toast instead of navigating anywhere.
+
+     `pumpfun` is the coin's pump.fun page — paste the full URL
+     (https://pump.fun/coin/<mint>) the moment the coin goes live, and every
+     pump.fun link on the site starts working. Until then they toast. */
   socials: {
     x:        "https://x.com/_DrunkCoin_",
-    telegram: "https://t.me/officialdrunkcoin"
+    telegram: "https://t.me/officialdrunkcoin",
+    pumpfun:  ""
   }
 };

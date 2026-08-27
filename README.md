@@ -8,6 +8,13 @@ anyone to acquire it: there is no chart, no contract pill, no swap instructions
 and no "buy" button anywhere. The whole site points at one thing — the
 countdown in `launchDate`. See [Turning the site on at launch](#turning-the-site-on-at-launch).
 
+**The launch happens on pump.fun.** The copy across the site describes a fair
+launch on the pump.fun bonding curve: no presale, no team allocation, LP
+poured and burned automatically at graduation, mint/freeze authority revoked
+at creation. The Drunkonomics "Pour" figures (~79% curve / ~21% graduation
+liquidity) are pump.fun's protocol standard, not parameters we choose — if
+pump.fun changes its recipe, update `tokenomics.html` to match.
+
 ## Structure
 
 ```
@@ -56,7 +63,7 @@ Everything that changes at launch lives in **`js/config.js`**:
 | Field | What it does |
 |---|---|
 | `launchDate` | When the doors open, as an ISO 8601 string (`2026-08-29T16:20:00Z`). Drives every countdown on the site. Empty or unparseable → the countdown blocks hide themselves. |
-| `socials` | X and Telegram URLs — the only two channels the site links to. An empty one stays disabled and shows a "coming soon" toast instead of navigating. |
+| `socials` | X, Telegram and pump.fun URLs. An empty one stays disabled and shows a "coming soon" toast instead of navigating. `socials.pumpfun` is deliberately empty pre-launch — paste the coin's full URL (`https://pump.fun/coin/<mint>`) the moment it goes live, and every pump.fun link on the site (footer on all pages, the channel card on `party.html`) starts working. |
 | `contract` | The SPL mint address. Nothing prints it yet — no page has a `data-contract` element — but `js/site.js` still fills any element that gets one, so it's here ready for launch day. |
 
 **One thing that isn't in `config.js`:** the `og:image` / `twitter:image` tags
@@ -111,11 +118,11 @@ deliberately written to be true *before* launch:
 
 | Where | What's pre-launch about it |
 |---|---|
-| `index.html` hero | The `badge--soon` pill reads "Launching on Solana", and there's no contract pill under the buttons. The pill markup was removed, not hidden — re-add a `.contract` block with `data-contract` / `data-copy-contract` and `js/site.js` fills it from `config.contract`. |
+| `index.html` hero | The `badge--soon` pill reads "Launching on pump.fun", and there's no contract pill under the buttons. The pill markup was removed, not hidden — re-add a `.contract` block with `data-contract` / `data-copy-contract` and `js/site.js` fills it from `config.contract`. |
 | `index.html` | The **live chart** section was deleted outright, along with `js/chart.js` and the chart half of `css/home.css`. If you want it back, pull it from git history rather than rebuilding it. |
 | `buy.html` | The whole page is "Get Ready" — wallet, practice, channels, wait — plus a card stating there is no token yet. That card is the first thing to rewrite. |
 | `party.html` | Bar Map Phase 1 is chipped "Launch night", not "Done". Wall of Fame quotes are about waiting, not holding. |
-| `tokenomics.html` | Figures are labelled as *planned* ("Planned Tax", "to be renounced at launch"). |
+| `tokenomics.html` | Figures are labelled as *planned* ("Planned Tax"), and the fine print states nothing is live yet. The Pour and "How the Night Goes" describe the pump.fun mechanics in the future tense — after graduation, "the keg is community property" becomes checkable on-chain, so nothing needs rewording, but the "remember nothing is live yet" line in the fine print does. |
 | Every page | The nav CTA points at `party.html`; the footer disclaimer states the token has not launched and that anything trading under the name is a scam. |
 
 The nav route is still `buy.html` with `data-nav="buy"` — only the visible label
