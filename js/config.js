@@ -9,7 +9,7 @@ window.DRUNK_CONFIG = {
      pre-launch site and there is no address to print — but the plumbing in
      js/site.js is still live, so any element you give a `data-contract`
      attribute fills itself in from here the moment you paste one in. */
-  contract: "",
+  contract: "FJeysrMFhWk4S3y8E21TpXSKXVGYp1aJ45p2v1sKpump",
   contractPlaceholder: "TBA — sober up, it's coming 🔜",
 
   /* --- Launch countdown --------------------------------------------------
@@ -22,7 +22,7 @@ window.DRUNK_CONFIG = {
      In the past      -> the blocks switch to the "we're live" message.
 
      See js/countdown.js. */
-  launchDate: "2026-08-29T16:20:00Z",
+  launchDate: "2020-01-01T00:00:00Z",
 
   /* Official channels. Empty links stay disabled and show a "coming soon"
      toast instead of navigating anywhere.
@@ -33,6 +33,6 @@ window.DRUNK_CONFIG = {
   socials: {
     x:        "https://x.com/_DrunkCoin_",
     telegram: "https://t.me/officialdrunkcoin",
-    pumpfun:  ""
+    pumpfun:  "https://pump.fun/coin/FJeysrMFhWk4S3y8E21TpXSKXVGYp1aJ45p2v1sKpump"
   }
 };
