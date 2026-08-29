@@ -424,34 +424,42 @@ async function initChart() {
 async function updateChart() {
   try {
     const response = await fetch(`https://api.pump.fun/coin/${CA}`);
-    if (!response.ok) throw new Error('API error');
+    if (!response.ok) throw new Error(`API ${response.status}`);
     const data = await response.json();
 
     // Update stats
-    document.getElementById('mc-display').textContent = '$' +
+    const mcDisplay = document.getElementById('mc-display');
+    const priceDisplay = document.getElementById('price-display');
+    const volumeDisplay = document.getElementById('volume-display');
+    const holdersDisplay = document.getElementById('holders-display');
+
+    if (mcDisplay) mcDisplay.textContent = '$' +
       (data.mc / 1000000 >= 1 ? (data.mc / 1000000).toFixed(2) + 'M' : (data.mc / 1000).toFixed(0) + 'k');
-    document.getElementById('price-display').textContent = '$' + parseFloat(data.price).toFixed(8);
-    document.getElementById('volume-display').textContent = '$' +
+    if (priceDisplay) priceDisplay.textContent = '$' + parseFloat(data.price).toFixed(10);
+    if (volumeDisplay) volumeDisplay.textContent = '$' +
       (data.volume24 / 1000 >= 1 ? (data.volume24 / 1000).toFixed(1) + 'k' : data.volume24.toFixed(0));
-    document.getElementById('holders-display').textContent = data.holders || '—';
+    if (holdersDisplay) holdersDisplay.textContent = data.holders || '—';
 
     // Update chart
     const now = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-    priceHistory.push(parseFloat(data.price));
-    timeHistory.push(now);
+    const price = parseFloat(data.price);
+    if (!isNaN(price) && price > 0) {
+      priceHistory.push(price);
+      timeHistory.push(now);
 
-    if (priceHistory.length > 60) {
-      priceHistory.shift();
-      timeHistory.shift();
-    }
+      if (priceHistory.length > 60) {
+        priceHistory.shift();
+        timeHistory.shift();
+      }
 
-    if (chartInstance) {
-      chartInstance.data.labels = timeHistory;
-      chartInstance.data.datasets[0].data = priceHistory;
-      chartInstance.update('none');
+      if (chartInstance) {
+        chartInstance.data.labels = timeHistory;
+        chartInstance.data.datasets[0].data = priceHistory;
+        chartInstance.update('none');
+      }
     }
   } catch (err) {
-    console.log('Chart updating...');
+    console.error('Chart error:', err.message);
   }
 }
 
