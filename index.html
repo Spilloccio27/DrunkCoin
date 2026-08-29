@@ -134,38 +134,56 @@
     </div>
   </div>
 
-  <!-- ---------------------------- LIVE CHART --------------------- -->
+  <!-- ---------------------------- LIVE CHART SCREENER --------------------- -->
   <section class="section section--tight" id="chart" style="scroll-margin-top:96px">
     <div class="container">
-      <div class="reveal" style="background: rgba(26, 17, 64, 0.8); border: 1px solid rgba(92, 227, 242, 0.2); border-radius: 16px; padding: 2rem;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
-          <div>
-            <p style="font-size: 0.75rem; color: #5ce3f2; text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.8;">Market Cap</p>
-            <p style="font-size: 2rem; font-weight: bold; color: #f5ce4d;" id="mc-display">-</p>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: #5ce3f2; text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.8;">Price</p>
-            <p style="font-size: 2rem; font-weight: bold; color: #2bf0a4;" id="price-display">-</p>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: #5ce3f2; text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.8;">24h Volume</p>
-            <p style="font-size: 2rem; font-weight: bold; color: #ff4fe0;" id="volume-display">-</p>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: #5ce3f2; text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.8;">Holders</p>
-            <p style="font-size: 2rem; font-weight: bold; color: #9b4de0;" id="holders-display">-</p>
+      <div class="reveal" style="background: linear-gradient(135deg, rgba(8,10,40,0.95) 0%, rgba(26,17,64,0.95) 100%); border: 2px solid rgba(92, 227, 242, 0.3); border-radius: 12px; padding: 0; overflow: hidden; box-shadow: 0 8px 32px rgba(92, 227, 242, 0.15);">
+
+        <!-- Header -->
+        <div style="background: linear-gradient(90deg, rgba(92,227,242,0.1) 0%, rgba(245,206,77,0.05) 100%); border-bottom: 1px solid rgba(92, 227, 242, 0.2); padding: 1.5rem 2rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <div>
+              <h2 style="color: #f5ce4d; font-size: 1.3rem; margin: 0; font-weight: 700;">$DRUNK LIVE</h2>
+              <p style="color: #5ce3f2; font-size: 0.85rem; margin: 0.25rem 0 0 0; opacity: 0.8;">📈 pump.fun Real-time Charts</p>
+            </div>
+            <span style="color: #2bf0a4; font-size: 2rem;">●</span>
           </div>
         </div>
 
-        <div style="position: relative; width: 100%; height: 350px; margin-bottom: 1.5rem; background: rgba(8, 10, 40, 0.6); border-radius: 8px; padding: 1rem;">
+        <!-- Stats Grid -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid rgba(92, 227, 242, 0.15);">
+          <div style="padding: 1.5rem 1.5rem; border-right: 1px solid rgba(92, 227, 242, 0.15);">
+            <p style="font-size: 0.7rem; color: #5ce3f2; text-transform: uppercase; margin: 0 0 0.5rem 0; font-weight: 600; letter-spacing: 1px;">Market Cap</p>
+            <p style="font-size: 1.8rem; font-weight: 700; color: #f5ce4d; margin: 0;" id="mc-display">-</p>
+          </div>
+          <div style="padding: 1.5rem 1.5rem; border-right: 1px solid rgba(92, 227, 242, 0.15);">
+            <p style="font-size: 0.7rem; color: #5ce3f2; text-transform: uppercase; margin: 0 0 0.5rem 0; font-weight: 600; letter-spacing: 1px;">Price</p>
+            <p style="font-size: 1.8rem; font-weight: 700; color: #2bf0a4; margin: 0;" id="price-display">-</p>
+          </div>
+          <div style="padding: 1.5rem 1.5rem; border-right: 1px solid rgba(92, 227, 242, 0.15);">
+            <p style="font-size: 0.7rem; color: #5ce3f2; text-transform: uppercase; margin: 0 0 0.5rem 0; font-weight: 600; letter-spacing: 1px;">24h Volume</p>
+            <p style="font-size: 1.8rem; font-weight: 700; color: #ff4fe0; margin: 0;" id="volume-display">-</p>
+          </div>
+          <div style="padding: 1.5rem 1.5rem;">
+            <p style="font-size: 0.7rem; color: #5ce3f2; text-transform: uppercase; margin: 0 0 0.5rem 0; font-weight: 600; letter-spacing: 1px;">Holders</p>
+            <p style="font-size: 1.8rem; font-weight: 700; color: #9b4de0; margin: 0;" id="holders-display">-</p>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div style="position: relative; width: 100%; height: 400px; background: rgba(8, 10, 40, 0.5); padding: 1.5rem; border-bottom: 1px solid rgba(92, 227, 242, 0.15);">
           <canvas id="priceChart" style="width: 100% !important; height: 100% !important;"></canvas>
         </div>
 
-        <p style="text-align: center; font-size: 0.85rem; color: #999;">
-          🍻 THE BAR IS OPEN • Live on pump.fun • Updates every 5 seconds
-          <br>
-          <a href="https://pump.fun/coin/FJeysrMFhWk4S3y8E21TpXSKXVGYp1aJ45p2v1sKpump" target="_blank" style="color: #5ce3f2; text-decoration: none; margin-top: 1rem; display: inline-block;">→ View on pump.fun ←</a>
-        </p>
+        <!-- Footer -->
+        <div style="background: rgba(92, 227, 242, 0.05); padding: 1rem 2rem; text-align: center; border-top: 1px solid rgba(92, 227, 242, 0.15);">
+          <p style="color: #999; font-size: 0.8rem; margin: 0 0 0.8rem 0;">
+            ⚡ LIVE DATA • Updates Every 5 Seconds • Fair Launch on pump.fun
+          </p>
+          <a href="https://pump.fun/coin/FJeysrMFhWk4S3y8E21TpXSKXVGYp1aJ45p2v1sKpump" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #f5ce4d 0%, #ffd966 100%); color: #080a28; padding: 0.6rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;">
+            🍻 Trade on pump.fun
+          </a>
+        </div>
       </div>
     </div>
   </section>
